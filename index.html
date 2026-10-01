@@ -928,23 +928,42 @@
         });
 
         // Resume download simulation / handler
+    
         function downloadResume() {
-            // Create a temporary notification box
+            // Actual resume file
+            const resumeUrl = 'assets/Vishal_Pandey_Resume.pdf';
+
+            // Trigger PDF download
+            const link = document.createElement('a');
+            link.href = resumeUrl;
+            link.download = 'Vishal_Pandey_Resume.pdf';
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Notification
             const notif = document.createElement('div');
-            notif.className = 'fixed bottom-5 right-5 z-50 glass-card px-6 py-4 rounded-2xl border-cyan-500/50 text-cyan-400 font-mono text-sm shadow-2xl flex items-center space-x-3 transition-all duration-300';
+
+            notif.className =
+                'fixed bottom-5 right-5 z-50 glass-card px-6 py-4 rounded-2xl border-cyan-500/50 text-cyan-400 font-mono text-sm shadow-2xl flex items-center space-x-3 transition-all duration-300';
             notif.innerHTML = `
                 <i data-lucide="check-circle-2" class="w-5 h-5 text-cyan-400"></i>
-                <span>Resume PDF download initiated for Vishal Pandey (TCS Java Dev).</span>
+                <span>Resume downloaded successfully.</span>
             `;
+
             document.body.appendChild(notif);
             lucide.createIcons();
 
             setTimeout(() => {
                 notif.style.opacity = '0';
-                setTimeout(() => notif.remove(), 300);
-            }, 4000);
-        }
 
+                setTimeout(() => {
+                    notif.remove();
+                }, 300);
+            }, 4000);
+        }    
+            
         // Smooth scroll spy and navbar background enhancement on scroll
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
